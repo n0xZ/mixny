@@ -7,7 +7,7 @@ import {
 
 const Header = () => {
 	return (
-		<Stack w="full" p={3} as="header" backgroundColor="gray">
+		<Stack w="full" p={3} as="header" backgroundColor="whatsapp.300">
 			<Container
 				as="nav"
 				maxW="container.xl"

@@ -17,7 +17,7 @@ const PositionCard: FC<Props> = ({ position }) => {
 				boxShadow="md"
 				borderRadius="lg"
 				border="2px"
-				borderColor="pink.400"
+				borderColor="whatsapp.500"
 				h={150}
 				padding={3}
 			>
