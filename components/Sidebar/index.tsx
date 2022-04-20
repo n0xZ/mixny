@@ -1,39 +1,26 @@
-import { FC } from 'react';
-import { Flex, Divider, Input } from '@chakra-ui/react';
+import { FC, ReactNode } from 'react';
+import { Flex, Divider } from '@chakra-ui/react';
 interface SidebarProps {
-	categories: number;
-	inputValue: string;
-	handleInputChange: (
-		e: React.ChangeEvent<HTMLInputElement>
-	) => void;
+	children?: ReactNode;
 }
-const Sidebar: FC<SidebarProps> = ({
-	inputValue,
-	handleInputChange,
-}) => {
+const Sidebar: FC<SidebarProps> = ({ children }) => {
 	return (
 		<Flex
 			flexDir="column"
 			justifyContent="start"
 			w="20%"
 			alignItems="center"
+			borderBottom={2}
+			borderColor="gray"
+			as="section"
 		>
 			<Flex
 				w="full"
 				flexDir="row"
 				h="100%"
-				p={4}
 				justifyContent="space-between"
 			>
-				<Flex w="full">
-					<Input
-						p={2}
-						placeholder="Filtrar por categorías..."
-						value={inputValue}
-						onChange={handleInputChange}
-						mx={3}
-					/>
-				</Flex>
+				<Flex w="full">{children}</Flex>
 
 				<Divider orientation="vertical" height="full" />
 			</Flex>
