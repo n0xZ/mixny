@@ -1,5 +1,3 @@
-
-
 export interface PositionResult {
 	total: number;
 	start: number;
@@ -7,6 +5,10 @@ export interface PositionResult {
 	data: Position[];
 }
 
+export interface PositionState {
+	searchPosition: string;
+	searchPositionResult: Position[];
+}
 export interface Position {
 	employmentType: EmploymentType;
 	publicDescription: string;
@@ -37,3 +39,7 @@ export interface PublishedCategory {
 	id: number;
 	name: string;
 }
+
+export type Category = {
+	[key: string]: number;
+};
