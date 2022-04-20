@@ -4,6 +4,7 @@ import {
 	Text,
 	Stack,
 } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 import { FC } from 'react';
 import { Position } from 'types';
 import LinkBox from '../LinkBox';
@@ -11,6 +12,7 @@ interface Props {
 	position: Position;
 }
 const PositionCard: FC<Props> = ({ position }) => {
+	const { locale } = useRouter();
 	return (
 		<LinkBox href={`/position/${position.id}`}>
 			<GridItem
@@ -18,7 +20,7 @@ const PositionCard: FC<Props> = ({ position }) => {
 				borderRadius="lg"
 				border="2px"
 				borderColor="whatsapp.500"
-				h={150}
+				h={160}
 				padding={3}
 			>
 				<Stack
@@ -27,19 +29,19 @@ const PositionCard: FC<Props> = ({ position }) => {
 					justifyContent="space-between"
 					alignItems="center"
 				>
-					<Heading as="h3" color="blue.500" fontSize="lg">
+					<Heading as="h3" color="blue" fontSize="lg">
 						{position.title}
 					</Heading>
-					<Stack>
-						<Text>{position.employmentType}</Text>
-						<Text></Text>
-					</Stack>
+
+					<Text>{position.employmentType}</Text>
 				</Stack>
-				<Text fontWeight="bold" marginBottom={3}>
+				<Text fontWeight="bold" marginBottom={2}>
 					{position.publishedCategory.name}
 				</Text>
 				<Text>
-					Read the full position description by clicking here.
+					{locale === 'en'
+						? '	Read the full position description by clicking here. '
+						: '	Lea la descripción de la propuesta haciendo click acá. '}
 				</Text>
 			</GridItem>
 		</LinkBox>
