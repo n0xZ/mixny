@@ -3,38 +3,40 @@ import type {
 	InferGetStaticPropsType,
 	NextPage,
 } from 'next';
+
 import Head from 'next/head';
-import { useState } from 'react';
-import Layout from '@/components/Layout';
-import PositionList from '@/components/Positions/PositionList';
+import { useEffect, useState } from 'react';
 import {
 	Container,
 	Flex,
 	Stack,
 	Text,
+	useMediaQuery,
 } from '@chakra-ui/react';
+import Layout from '@/components/Layout';
+import PositionList from '@/components/Positions/PositionList';
 import Sidebar from '@/components/Sidebar';
-import { PositionResult, Position } from '../types';
+import PositionSearch from '@/components/Positions/PositionSearch';
+import { usePositions } from '@/hooks/usePositions';
+import { PositionResult } from '../types';
 const Home: NextPage = ({
 	positions,
+	locale,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-	const [actualPositions, setActualPositions] =
-		useState<Position[]>(positions);
-	const [search, setSearch] = useState<string>('');
-	const handleInputChange = (
-		e: React.ChangeEvent<HTMLInputElement>
-	) => {
-		const { value } = e.target;
-		setSearch(value);
-		const filteredPositions = positions.filter(
-			(position: Position) => {
-				return position.title
-					.toLowerCase()
-					.includes(value.toLowerCase());
-			}
-		);
-		setActualPositions(filteredPositions);
-	};
+
+	const [isComponentMounted, setIsComponentMounted] = useState(false);
+	const {
+		actualPositions,
+		handleInputChange,
+		positionState,
+	} = usePositions(positions);
+	const [isLargerThan1280] = useMediaQuery(
+		'(min-width: 1280px)'
+	);
+
+	useEffect(()=>{
+		setIsComponentMounted(true);
+	},[])
 	return (
 		<Layout>
 			<Head>
@@ -46,18 +48,34 @@ const Home: NextPage = ({
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<Flex w="full" h="full" as="section">
-				<Sidebar
-					inputValue={search}
-					handleInputChange={handleInputChange}
-					categories={0}
-				/>
+				{isLargerThan1280 && isComponentMounted ? (
+					<Sidebar>
+						<PositionSearch
+							inputValue={positionState.searchPosition}
+							handleInputChange={handleInputChange}
+						/>
+					</Sidebar>
+				) : null}
 
 				<Container maxW="container.xl" h="full" minH="100vh">
-					<Text as="span" fontSize="lg" fontWeight="bold">
-						Open positions ({positions.length})
+					<Text fontSize="lg" fontWeight="bold" marginBottom={3}>
+						{locale === 'es'
+							? 'Posiciones abiertas'
+							: 'Open positions'}{' '}
+						(
+						{positionState.searchPosition.length === 0
+							? actualPositions.length
+							: positionState.searchPositionResult.length}
+						)
 					</Text>
 					<Stack flex={1} flexDir="column" alignItems="center">
-						<PositionList positions={positions} />
+						{positionState.searchPosition.length !== 0 ? (
+							<PositionList
+								positions={positionState.searchPositionResult}
+							/>
+						) : (
+							<PositionList positions={actualPositions} />
+						)}
 					</Stack>
 				</Container>
 			</Flex>
@@ -67,12 +85,15 @@ const Home: NextPage = ({
 
 export default Home;
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({
+	locale,
+}) => {
 	const data = await fetch(String(process.env.API_URL));
 	const positions: PositionResult = await data.json();
 	return {
 		props: {
 			positions: positions.data,
+			locale,
 		},
 		revalidate: 60,
 	};
