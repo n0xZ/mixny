@@ -8,14 +8,26 @@ import Layout from '@/components/Layout';
 import { Container, Heading, Text } from '@chakra-ui/react';
 import { PositionResult } from 'types';
 import Link from '@/components/Link';
+import Head from 'next/head';
 
 const DynamicPositionPage = ({
 	position,
+	locale,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
 	return (
 		<Layout>
+			<Head>
+				<title>Challenge Majorkeys - {position.title}</title>
+				<title>Challenge majorkeys </title>
+				<meta
+					name="description"
+					content="Challenge de Majorkeys realizado por Gonzalo Molina"
+				/>
+			</Head>
 			<Container maxW="container.md">
-				<Link href="/">Back</Link>
+				<Link href="/" marginBottom={3}>
+					{locale === 'es' ? 'Volver atrás' : 'Back'}
+				</Link>
 				<Heading
 					as="h3"
 					fontWeight="bold"
@@ -53,7 +65,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps<
 	any,
 	any
-> = async ({ params: { id } }) => {
+> = async ({ locale, params: { id } }) => {
 	const response = await fetch(String(process.env.API_URL));
 	const { data }: PositionResult = await response.json();
 	const filteredPosition = data.find(
@@ -70,6 +82,7 @@ export const getStaticProps: GetStaticProps<
 	return {
 		props: {
 			position: filteredPosition,
+			locale,
 		},
 	};
 };
