@@ -1,5 +1,5 @@
-import { FC, ReactNode } from 'react';
 import NextLink from 'next/link';
+import { FC, ReactNode } from 'react';
 import {
 	LinkBox as ChakraLinkBox,
 	LinkBoxProps,
@@ -17,7 +17,7 @@ const LinkBox: FC<Props> = ({
 	return (
 		<ChakraLinkBox
 			{...rest}
-			as="article"
+			as="aside"
 			_hover={{
 				opacity: '0.5',
 				transition: '0.2s ease-in-out',

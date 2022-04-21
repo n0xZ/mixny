@@ -1,9 +1,9 @@
-import { FC, ReactNode } from 'react';
+import NextLink from 'next/link';
+import { FC } from 'react';
 import {
 	Link as ChakraLink,
 	LinkProps,
 } from '@chakra-ui/react';
-import NextLink from 'next/link';
 interface Props extends LinkProps {
 	href: string;
 }

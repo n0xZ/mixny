@@ -1,5 +1,5 @@
-import { Stack } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
+import { Stack } from '@chakra-ui/react';
 import Header from './Header';
 interface Props {
 	children?: ReactNode;

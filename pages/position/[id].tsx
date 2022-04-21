@@ -3,12 +3,13 @@ import {
 	GetStaticProps,
 	InferGetStaticPropsType,
 } from 'next';
-import Layout from '@/components/Layout';
+import Head from 'next/head';
 
 import { Container, Heading, Text } from '@chakra-ui/react';
-import { PositionResult } from 'types';
 import Link from '@/components/Link';
-import Head from 'next/head';
+import Layout from '@/components/Layout';
+
+import { PositionResult } from 'types';
 
 const DynamicPositionPage = ({
 	position,
@@ -58,7 +59,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 		paths: data.map((position) => ({
 			params: { id: String(position.id) },
 		})),
-		fallback: 'blocking',
+		fallback: false,
 	};
 };
 

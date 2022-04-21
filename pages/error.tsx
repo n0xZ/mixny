@@ -1,7 +1,7 @@
+import { Text } from '@chakra-ui/react';
 import Layout from '@/components/Layout';
 import Link from '@/components/Link';
-import { Text } from '@chakra-ui/react';
-import React from 'react';
+
 
 const ErrorPage = () => {
 	return (

@@ -9,7 +9,6 @@ import { useEffect, useState } from 'react';
 import {
 	Container,
 	Flex,
-	Stack,
 	Text,
 	useMediaQuery,
 } from '@chakra-ui/react';
@@ -23,20 +22,17 @@ const Home: NextPage = ({
 	positions,
 	locale,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-
-	const [isComponentMounted, setIsComponentMounted] = useState(false);
-	const {
-		actualPositions,
-		handleInputChange,
-		positionState,
-	} = usePositions(positions);
+	const [isComponentMounted, setIsComponentMounted] =
+		useState(false);
+	const { handleInputChange, positionState } =
+		usePositions(positions);
 	const [isLargerThan1280] = useMediaQuery(
 		'(min-width: 1280px)'
 	);
 
-	useEffect(()=>{
+	useEffect(() => {
 		setIsComponentMounted(true);
-	},[])
+	}, []);
 	return (
 		<Layout>
 			<Head>
@@ -64,19 +60,18 @@ const Home: NextPage = ({
 							: 'Open positions'}{' '}
 						(
 						{positionState.searchPosition.length === 0
-							? actualPositions.length
+							? positions.length
 							: positionState.searchPositionResult.length}
 						)
 					</Text>
-					<Stack flex={1} flexDir="column" alignItems="center">
-						{positionState.searchPosition.length !== 0 ? (
-							<PositionList
-								positions={positionState.searchPositionResult}
-							/>
-						) : (
-							<PositionList positions={actualPositions} />
-						)}
-					</Stack>
+
+					{positionState.searchPosition.length !== 0 ? (
+						<PositionList
+							positions={positionState.searchPositionResult}
+						/>
+					) : (
+						<PositionList positions={positions} />
+					)}
 				</Container>
 			</Flex>
 		</Layout>
