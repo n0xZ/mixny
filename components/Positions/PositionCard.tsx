@@ -1,13 +1,13 @@
+import { useRouter } from 'next/router';
+import { FC } from 'react';
 import {
 	GridItem,
 	Heading,
 	Text,
 	Stack,
 } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
-import { FC } from 'react';
-import { Position } from 'types';
 import LinkBox from '../LinkBox';
+import { Position } from 'types';
 interface Props {
 	position: Position;
 }
@@ -22,6 +22,7 @@ const PositionCard: FC<Props> = ({ position }) => {
 				borderColor="whatsapp.500"
 				h={160}
 				padding={3}
+				as="aside"
 			>
 				<Stack
 					flex={1}

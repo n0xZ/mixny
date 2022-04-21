@@ -1,5 +1,5 @@
-import { FC } from 'react';
 import { useRouter } from 'next/router';
+import { FC } from 'react';
 import { Flex, Input } from '@chakra-ui/react';
 interface Props {
 	inputValue: string;
