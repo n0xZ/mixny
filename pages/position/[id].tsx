@@ -72,7 +72,7 @@ export const getStaticProps: GetStaticProps<
 	const filteredPosition = data.find(
 		(position) => position.id === parseInt(id)
 	);
-	console.log(filteredPosition);
+
 	if (!filteredPosition)
 		return {
 			redirect: {
