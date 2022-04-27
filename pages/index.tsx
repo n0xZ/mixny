@@ -36,7 +36,7 @@ const Home: NextPage = ({
 	return (
 		<Layout>
 			<Head>
-				<title>Challenge majorkeys </title>
+				<title>Challenge Majorkeys</title>
 				<meta
 					name="description"
 					content="Challenge de Majorkeys realizado por Gonzalo Molina"

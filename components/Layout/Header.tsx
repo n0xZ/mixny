@@ -7,7 +7,12 @@ import {
 
 const Header = () => {
 	return (
-		<Stack w="full" p={3} as="header" backgroundColor="whatsapp.300">
+		<Stack
+			w="full"
+			p={3}
+			as="header"
+			backgroundColor="whatsapp.300"
+		>
 			<Container
 				as="nav"
 				maxW="container.xl"
@@ -16,7 +21,7 @@ const Header = () => {
 				alignItems="center"
 			>
 				<Heading as="h2">
-					<Link href="/">Tradehelm</Link>
+					<Link href="/">Home</Link>
 				</Heading>
 			</Container>
 		</Stack>
