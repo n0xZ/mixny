@@ -5,6 +5,7 @@ export interface PositionResult {
 	data: Position[];
 }
 
+//This type is related to usePosition state
 export interface PositionState {
 	searchPosition: string;
 	searchPositionResult: Position[];
