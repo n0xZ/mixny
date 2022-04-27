@@ -30,7 +30,7 @@ const PositionCard: FC<Props> = ({ position }) => {
 					justifyContent="space-between"
 					alignItems="center"
 				>
-					<Heading as="h3" color="blue" fontSize="lg">
+					<Heading as="h3" fontSize="lg">
 						{position.title}
 					</Heading>
 
